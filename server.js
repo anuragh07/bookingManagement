@@ -1,26 +1,26 @@
-
 const express = require('express');
 const mysql = require('mysql2');
 const bodyparser = require('body-parser');
 const app = express();
 const port = 8080;
 const path = require('path');
-// const fs = require('fs');
+
 app.use(bodyparser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
+
 const database = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Benna@2011',
     database: 'hackathon'
 });
+
 database.connect(err => {
     if (err) {
         throw err;
     }
-    console.log("Connected to the database.")
+    console.log("Connected to the database.");
 });
-
 app.get('/bookings', (req, res) => {
     const statement = "SELECT * FROM bookings";
     database.query(statement, (err, result) => {
@@ -29,8 +29,8 @@ app.get('/bookings', (req, res) => {
         }
         console.log("GET method for all the records is successful.");
         res.json(result);
-    })
-})
+    });
+});
 
 app.get('/bookings/:id', (req, res) => {
     const statement = 'SELECT * FROM bookings WHERE id = ?';
@@ -39,7 +39,7 @@ app.get('/bookings/:id', (req, res) => {
             throw err;
         }
         if (result.length === 0) {
-            return res.status(404).json({ message: "booking not found" });
+            return res.status(404).json({ message: "Booking not found" });
         }
         console.log(`GET request for booking with id: ${req.params.id}`);
         res.json(result[0]);
@@ -47,11 +47,10 @@ app.get('/bookings/:id', (req, res) => {
 });
 
 app.post('/bookings', (req, res) => {
-    const  {id,...newBooking}  = req.body;
-    // console.log("booking data:", newBooking);
+    const { id, ...newBooking } = req.body;
 
     if (Object.keys(newBooking).length === 0) {
-        console.log(`Booking data is required`);
+        console.log("Booking data is required");
         return res.status(400).json({ message: "Booking data is required" });
     }
 
@@ -62,15 +61,16 @@ app.post('/bookings', (req, res) => {
             return res.status(500).json({ message: "Internal server error" });
         }
 
-        console.log(`The booking details are added to the database`);
+        console.log("The booking details are added to the database");
         res.status(201).json({
-            message: "booking data has been inserted into the database", booking: {
+            message: "Booking data has been inserted into the database",
+            booking: {
                 id: result.insertId,
                 ...newBooking
             }
         });
     });
-})
+});
 
 app.put('/bookings/:id', (req, res) => {
     const updatedBooking = req.body;
@@ -83,8 +83,11 @@ app.put('/bookings/:id', (req, res) => {
             console.log("Error updating booking record:", err);
             return res.status(500).json({ message: "Internal server error" });
         }
-        console.log(`The booking details have been updated in the database`);
-        res.status(200).json({ message: "booking data has been updated", booking: { id: req.params.id, ...updatedBooking } });
+        console.log("The booking details have been updated in the database");
+        res.status(200).json({
+            message: "Booking data has been updated",
+            booking: { id: req.params.id, ...updatedBooking }
+        });
     });
 });
 
@@ -95,12 +98,11 @@ app.delete('/bookings/:id', (req, res) => {
             console.log("Internal server error");
             return res.status(500).json({ message: "Internal server error" });
         }
-        console.log(`Booking record with id: ${req.params.id} has been delete successfully.`);
-        res.status(200).json({ message: "Booking record has been deleted successfully." })
-
-    })
-})
+        console.log(`Booking record with id: ${req.params.id} has been deleted successfully.`);
+        res.status(200).json({ message: "Booking record has been deleted successfully." });
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server is running at port: ${port}, http://localhost:${port}`);
-})
+});
