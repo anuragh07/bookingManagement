@@ -1,0 +1,157 @@
+
+body {
+    font-family: 'Karla', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background-color: green;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: background-color 1s ease;
+}
+
+.button:hover {
+    background-color: darkgreen;
+}
+
+.tableContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+#editBtn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #c6c3c3;
+}
+#deleteBtn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #c6c3c3;
+}
+tbody tr:hover {
+    background-color: rgba(24, 22, 22, 0.562);
+    color: white;
+}
+tbody #editBtn:hover {
+    background-color: green;
+    color: white;
+}
+tbody #deleteBtn:hover {
+    background-color: red;
+    color: white;
+}
+
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* Form page styles */
+.formContainer {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-in;
+}
+
+.formContainer h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Julius Sans One', sans-serif;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#submitBtn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitBtn:hover {
+    background-color: darkgreen;
+}
+
+.button.cancel {
+    background-color: red;
+    text-align: center;
+}
+
+.button.cancel:hover {
+    background-color: darkred;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
